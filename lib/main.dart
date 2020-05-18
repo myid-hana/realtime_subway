@@ -25,7 +25,12 @@ class _MainPageState extends State<MainPage> {
   static const String _urlsuffix = '/json/realtimeStationArrival/0/5/';  //인증키 뒷 주소
   static const String _defaultStation = '신도림';   //받아올 변수값(지하철 명)
 
-  
+  //가져올 정보에 대한 초기화, 가져올 json 데이터와 이름이 같아야 한다.
+  String _response = '';
+  int _rowNum;
+  String _trainLineNm;
+  String _subwayHeading;
+  String _arylMsg2;
 
 
   @override
