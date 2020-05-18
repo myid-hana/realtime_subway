@@ -65,13 +65,25 @@ class _MainPageState extends State<MainPage> {
 
   @override
 
-  void initState(){  //화면의 전환 시점이 있을 때마다 초기화 
+  void initState(){  //화면의 전환 시점이 있을 때마다 초기화
     super.initState();
     _httpGet(_buildUrl(_defaultStation));
   }
 
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('실시간 지하철 정보'),
+      ),
+      body: Center(
+        child: ListView(
+          children: <Widget>[
+            Text('$_rowNum'),
+            Text('$_subwayId'),
+          ],
+        ),
+      ),
+    );
   }
 }
 
