@@ -41,7 +41,11 @@ class _MainPageState extends State<MainPage> {
     return sb.toString();
   }
 
-  
+  _httpGet(String url) async{  //get으로 받은 주소값을 실행한다. 비동기식
+    var response = await http.get(_buildUrl(_defaultStation));  //실행 응답
+    String responseBody = response.body;
+    
+  }
 
 
   @override
