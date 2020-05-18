@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';  //API에서 제공하는 서로 다른 데이터 형식을 encoding, decoding 해주는 pakage
 
 void main() => runApp(RealTimeSubway());
 
@@ -28,9 +29,11 @@ class _MainPageState extends State<MainPage> {
   //가져올 정보에 대한 초기화, 가져올 json 데이터와 이름이 같아야 한다.
   String _response = '';
   int _rowNum;
+  String _subwayId;
   String _trainLineNm;
   String _subwayHeading;
   String _arylMsg2;
+
 
   String _buildUrl(String station){   // url 주소값 문자열 나열
     StringBuffer sb = StringBuffer();
@@ -44,9 +47,21 @@ class _MainPageState extends State<MainPage> {
   _httpGet(String url) async{  //get으로 받은 주소값을 실행한다. 비동기식
     var response = await http.get(_buildUrl(_defaultStation));  //실행 응답
     String responseBody = response.body;
-    
-  }
 
+    var json = jsonDecode(responseBody);
+    //list 변수 이름 지정. 어떤 변수값이 들어올지 모르기 때문에 dynamic 사용.
+    List<dynamic> realtimeArrivalList = json['realtimeArrivalList'];
+    Map<String, dynamic> item = realtimeArrivalList[0];  //realtimeArrivalList의 0번째 배열가져옴.
+
+    setState(() { //상태가 변할 때마다 초기화했던 변수에 받아오는 json 값을 넣어줌.
+      _response = responseBody;
+      _rowNum = item['rowNum'];
+      _subwayId = item['subwayId'];
+      _trainLineNm = item['trainLineNm'];
+      _subwayHeading = item['subwayHeading'];
+      _arylMsg2 = item['arvlMsg2'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
