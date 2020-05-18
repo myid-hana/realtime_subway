@@ -80,6 +80,9 @@ class _MainPageState extends State<MainPage> {
           children: <Widget>[
             Text('$_rowNum'),
             Text('$_subwayId'),
+            Text('$_trainLineNm'),
+            Text('$_subwayHeading'),
+            Text('$_arylMsg2'),
           ],
         ),
       ),
