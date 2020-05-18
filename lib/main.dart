@@ -32,6 +32,17 @@ class _MainPageState extends State<MainPage> {
   String _subwayHeading;
   String _arylMsg2;
 
+  String _buildUrl(String station){   // url 주소값 문자열 나열
+    StringBuffer sb = StringBuffer();
+    sb.write(_urlPrefix);
+    sb.write(_userkey);
+    sb.write(_urlsuffix);
+    sb.write(_defaultStation);
+    return sb.toString();
+  }
+
+  
+
 
   @override
   Widget build(BuildContext context) {
